@@ -1,2 +1,58 @@
-<h1>OgPreviewer#index</h1>
-<p>Find me in app/views/og_previewer/index.html.erb</p>
+<style>
+    table, table tr th, table tr td {
+        border: 1px solid #0094ff;
+    }
+
+    table {
+        width: 100%;
+        border: 1px solid;
+        border-collapse: collapse;
+    }
+</style>
+
+<h1>Open Graph Previewer</h1>
+
+<p>Enter the target URL you want to process and click 'Submit', the system will process the URL in the background.</p>
+<p>When the system processing is completed, you can refresh the web page to see the latest processing result.</p>
+
+<br/>
+
+<h2>Query interface</h2>
+
+<form style="width: 75%;">
+  <p>Please enter the URL that supports Open Graph: </p>
+  <label>
+    <input style="width: 75%;" type="text" name="submit_url" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+
+<br/>
+
+<h2>Process Results</h2>
+
+<form>
+  <button type="submit" name="clear">Clear history</button>
+</form>
+
+<table>
+  <thead>
+  <tr>
+    <th style="width: 15%;">Processing completion time</th>
+    <th style="width: 15%;">Time consuming</th>
+    <th style="width: 20%;">Status</th>
+    <th style="width: 50%;">Open Graph Image</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @view_results.reverse.each do |result| %>
+    <tr>
+      <td><%= result.complete_dt %></td>
+      <td><%= result.time_consuming %></td>
+      <td><%= result.status %></td>
+      <td><img src="<%= result.image_url %>" width="100%"/></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
